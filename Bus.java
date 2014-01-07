@@ -11,6 +11,28 @@ public class Bus implements Runnable{
 	private boolean en_marche=false;
 	private int vitesse;
 	private int position;
+	private int num_bus;
+	
+	private void envoyerInfos() throws Exception{
+		
+		System.out.println("Le bus "+ num_bus +" envoie ses infos au Serveur.");
+		
+		Socket socket = new Socket("localhost", 6000);
+		
+		PrintWriter sortie = new PrintWriter(socket.getOutputStream(),true);
+		BufferedReader entree = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		
+		
+		sortie.println("BUS;"+num_bus); //Envoi du message
+		String rep=entree.readLine();
+		
+		if(rep.equals("OKBUS")){
+			System.out.println("[OK] Infos reçues par le serveur");
+		}
+		//System.out.println("Le client a reçu : " + rep);
+	
+	
+	}
 	
 	
 	public void run(){
@@ -18,25 +40,24 @@ public class Bus implements Runnable{
 		
 			try
 			 {
-				Thread.sleep(2000);
-				System.out.println("Bus en Marche");
+				Thread.sleep(3000);
+				System.out.println("Bus " + num_bus + " en Marche");
+				envoyerInfos();
 			 }
 			 
 			catch
-			 (InterruptedException e) {
+			 (Exception e) {
 			
 				break;
 			 }
 		
 		}
 		
-		
-	
-	
-	
+		System.out.println("Bus " + num_bus + " arrêté.");
+
 	}
 	
-	private int num_bus;
+	
 	
 	public Bus(int num_bus){
 	

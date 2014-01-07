@@ -5,9 +5,9 @@ import java.io.*;
 public class ThreadClient extends Thread{
 	
 	private String str="";
-	
+	private String[] data=null;
 	private Socket port;
-	
+	private String delims = "[;]";
 	public ThreadClient(Socket port){
 		this.port=port;
 	}
@@ -24,26 +24,30 @@ public class ThreadClient extends Thread{
 			
 		
 		
-		while(!str.equals("lancé?")){	
-			//System.out.println("Debug");
+		
 			str=entree.readLine(); //Attente d'un message
 			
-			if (str.equals("lancé?")){
+			data=str.split(delims);
+			//SUR RECEPTION DE :  MESSAGE DE GESTIBUS AU LANCEMENT	
+			//if (str.equals("lancé?")){
+			if(data[0].equals("lancé?")){
 				System.out.println("Communication établie avec l'application Gestibus.");
+				sortie.println("OK");	
+			}
+			
+			//SUR RECEPTION DE :
+			
+			//if (str.equals("INFOS")){
+			if(data[0].equals("BUS")){
+				System.out.println("Communication établie avec le bus N°"+data[1]);
 				
 				sortie.println("OK");
-				//sortie.println( this.getName()+ " : Message reçu");	
+					
 
 			}
-			/*try{
-				Thread.sleep(5000);//Simulation de tache
-			}catch(InterruptedException e){}*/
 			
-			//System.out.println("Serveur a reçu " + str);
-						//System.out.println("Test " + str);
-			
-		}
 		
+		System.out.println("Fermeture de la connexion");
 		entree.close();
 		sortie.close();
 		

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class GestiBus{
 	
 	private static int NB_Bus=1;
+	private static int NB_Lignes=3;
 	private static ArrayList<Bus> TousLesBus  = new ArrayList<Bus>();
+	private static ArrayList<Ligne> ToutesLesLignes  = new ArrayList<Ligne>();
 	
 	public static void ecranAccueil(){
 		System.out.println(" o========================================o");
@@ -30,6 +32,21 @@ public class GestiBus{
 			System.out.println("[OK] Création des "+NB_Bus+" bus.");
 		}else{
 			System.out.println("[Erreur] Création des "+NB_Bus+" bus.");
+		}
+		
+	
+	}
+	public static void initLigne(){
+		
+		int i;
+		for(i=0;i<NB_Lignes;i++){
+			ToutesLesLignes.add(new Ligne(i+1));
+			ToutesLesLignes.get(i).afficher_ligne();
+		} 
+		if(ToutesLesLignes.size()==NB_Lignes){
+			System.out.println("[OK] Création des "+NB_Lignes+" lignes.");
+		}else{
+			System.out.println("[Erreur] Création des "+NB_Lignes+" lignes.");
 		}
 		
 	
@@ -77,6 +94,7 @@ public class GestiBus{
 		ecranAccueil();
 		verifServeur();
 		initBus();
+		initLigne();
 		lancerBus();
 		try
 			 {
