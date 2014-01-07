@@ -5,6 +5,7 @@ import java.io.*;
 public class ThreadClient extends Thread{
 	
 	private String str="";
+	
 	private Socket port;
 	
 	public ThreadClient(Socket port){
@@ -21,23 +22,27 @@ public class ThreadClient extends Thread{
 			PrintWriter sortie = new PrintWriter(this.port.getOutputStream(),true);	
 			//System.out.println("Bienvenue sur le Serveur " +this.getName());	
 			
-			
 		
-		do{	
-			System.out.println("Debug");
+		
+		while(!str.equals("lancé?")){	
+			//System.out.println("Debug");
 			str=entree.readLine(); //Attente d'un message
+			
 			if (str.equals("lancé?")){
-				System.out.println("Bien lancé");
+				System.out.println("Communication établie avec l'application Gestibus.");
+				
+				sortie.println("OK");
+				//sortie.println( this.getName()+ " : Message reçu");	
+
 			}
 			/*try{
 				Thread.sleep(5000);//Simulation de tache
 			}catch(InterruptedException e){}*/
 			
 			//System.out.println("Serveur a reçu " + str);
-			sortie.println( this.getName()+ " : Message reçu");	
-			//System.out.println("Test " + str);
+						//System.out.println("Test " + str);
 			
-		}while(!str.equals("Bye"));
+		}
 		
 		entree.close();
 		sortie.close();
