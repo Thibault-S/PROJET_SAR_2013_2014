@@ -1,4 +1,4 @@
-/*  
+﻿/*  
 
 ╔══════════════╦════════════════════════════════════════════════════════════╗
 ║  ( (         ║						2013-2014							║
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class Affichage extends Thread{
-
+	String TAMERE = "Tchoin";
 	private static String etat="";
 	private  String role="";
 	
